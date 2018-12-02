@@ -1,0 +1,14 @@
+{
+  "name": "xchangenode",
+  "version": "1.0.0",
+  "description": "node js backend for x-change app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chris Muga",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
