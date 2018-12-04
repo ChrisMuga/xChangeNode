@@ -1,9 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
+var userController = require('../controllers/userController');
+
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function() {
   res.render('index', { title: 'X-Change' });
 });
+router.get('/register', userController.find );
 
 module.exports = router;
