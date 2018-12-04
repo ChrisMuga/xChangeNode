@@ -13,7 +13,15 @@ userController=module.exports={
     //find
     find: function(req, res,next)
     {
-        db.find()
+        //db.find(req, res)
+
+    },
+
+    //register
+
+    register: function(req, res, next)
+    {
+        res.send('Register');
     }
 
 }

@@ -32,10 +32,17 @@ const User = sequelize.define('user', {
     email_address: Sequelize.STRING,
   });
 
+var user_data;
+exports.find=function (req, res, next){
 
-exports.find=function (){
-    User.findByPk('5023').then(users => {
-        console.log(users.dataValues)
-    });
+    User.findByPk('5023')
+    .then(
+            users =>    {
+                            user_data = users.dataValues;
+                            res.send(user_data);
+                        }
+         );
 
 }
+
+

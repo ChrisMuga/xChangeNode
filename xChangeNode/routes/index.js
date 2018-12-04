@@ -7,6 +7,6 @@ var userController = require('../controllers/userController');
 router.get('/', function() {
   res.render('index', { title: 'X-Change' });
 });
-router.get('/register', userController.find );
+router.get('/register', userController.register );
 
 module.exports = router;
