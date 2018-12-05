@@ -57,7 +57,7 @@ userController=module.exports={
     register: function(req, res, next)
     {
         var id = Math.floor((Math.random() * 10000) + 10);
-       try{
+       
         User.create({
              
             id:             id,
@@ -66,12 +66,23 @@ userController=module.exports={
             email_address:  req.body.email_address,
             password:       req.body.password,
 
-          });
-        }catch(e)
-        {
-            console.log('error');
-        }
+          }).catch(function (e)
+          {
+              //console.log(e.errors)
+              console.log('fields:');
+              console.log(e.fields);
+              //console.log('=====');
+              //console.log(e.parent);
+              console.log('=====');
+              console.log('code: '+e.parent.code);
+              console.log('=====');
+              console.log('msg: '+e.parent.detail);
+              console.log('=====');
+              console.log('severity: '+e.parent.severity);
+              
 
+          })
+        
           res.send(req.body);
     }
 
