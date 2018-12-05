@@ -35,15 +35,18 @@ sequelize.authenticate().then(() => {
     password: Sequelize.STRING
   });
 
-var response;
-userController=module.exports={
- 
 
+userController=module.exports={
+
+ 
     // index
     index: function (req, res, next)
     {
        
-        res.render('index', { title: 'X-Change' });
+        res.render('index', { 
+            title: 'X-Change',
+           
+        });
     },
 
     //find
@@ -67,34 +70,52 @@ userController=module.exports={
             email_address:  req.body.email_address,
             password:       req.body.password,
 
-          }).catch(function (e)
-          {
+          }).then(function (){
+              data={
+                    id: req.body.id,
+                    first_name: req.body.first_name,
+                    last_name: req.body.last_name,
+                    email_address: req.body.email_address,
+              }
+              response={
+                  code: 0,
+                  msg: 'Registration Successful',
+                  data: data
+              }
+              res.send(response);
+            }).catch(function (e)
+            {
               //console.log(e.errors)
-              console.log('fields:');
-              console.log(e.fields);
+              //console.log('fields:');
+              //console.log(e.fields);
               //console.log('=====');
               //console.log(e.parent);
-              console.log('=====');
-              console.log('code: '+e.parent.code);
-              console.log('=====');
-              console.log('msg: '+e.parent.detail);
-              console.log('=====');
-              console.log('severity: '+e.parent.severity);
-
-                response = {
-                  fields: e.fields,
-                  code: e.parent.code,
-                  msg: e.parent.detail,
-                  severity: e.parent.severity 
-              }
-
-            res.send(response);
-            
+              //console.log('=====');
+              //console.log('code: '+e.parent.code);
+              //console.log('=====');
+              //console.log('msg: '+e.parent.detail);
+              //console.log('=====');
+              //console.log('severity: '+e.parent.severity);
+  
+              response = {
+                    fields: e.fields,
+                    code: e.parent.code,
+                    msg: e.parent.detail,
+                    severity: e.parent.severity 
+                }
+  
+                console.log(response);
+                res.send(response);
+  
               
-
-          })
+              
+                
+  
+            });
         
           
-    }
+    },
+
+
 
 }
