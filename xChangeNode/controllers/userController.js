@@ -1,5 +1,40 @@
-//connect to DBase
-db = require('./databaseController');
+db=require('./databaseController');
+const Sequelize = require('sequelize');
+// instantiate database
+const sequelize = new Sequelize(db.database, db.username, db.password, {
+    host: db.host,
+    dialect: db.dialect,
+    operatorsAliases: false,
+
+    pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
+    },
+
+});
+
+
+
+//connection to database
+sequelize.authenticate().then(() => {
+    console.log('Connection has been established successfully.');
+})
+.catch(err => {
+    console.error('Unable to connect to the database:', err);
+});
+
+
+
+ //define user model
+ const User =sequelize.define('user', {
+    first_name: Sequelize.STRING,
+    last_name: Sequelize.STRING,
+    email_address: Sequelize.STRING,
+    password: Sequelize.STRING
+  });
+
 
 userController=module.exports={
 
@@ -7,7 +42,7 @@ userController=module.exports={
     index: function (req, res, next)
     {
        
-        res.send('Hello Worldo?');
+        res.render('index', { title: 'X-Change' });
     },
 
     //find
@@ -21,7 +56,23 @@ userController=module.exports={
 
     register: function(req, res, next)
     {
-        res.send('Register');
+        var id = Math.floor((Math.random() * 10000) + 10);
+       try{
+        User.create({
+             
+            id:             id,
+            first_name:     req.body.first_name,
+            last_name:      req.body.last_name,
+            email_address:  req.body.email_address,
+            password:       req.body.password,
+
+          });
+        }catch(e)
+        {
+            console.log('error');
+        }
+
+          res.send(req.body);
     }
 
 }
