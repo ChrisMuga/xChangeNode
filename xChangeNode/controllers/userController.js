@@ -116,6 +116,15 @@ userController=module.exports={
           
     },
 
+    fetchAll:function()
+    {
+
+    },
+
+    fetch:function(){
+        
+    }
+
 
 
 }
