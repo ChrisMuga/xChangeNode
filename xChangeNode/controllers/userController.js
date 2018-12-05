@@ -35,8 +35,9 @@ sequelize.authenticate().then(() => {
     password: Sequelize.STRING
   });
 
-
+var response;
 userController=module.exports={
+ 
 
     // index
     index: function (req, res, next)
@@ -79,11 +80,21 @@ userController=module.exports={
               console.log('msg: '+e.parent.detail);
               console.log('=====');
               console.log('severity: '+e.parent.severity);
+
+                response = {
+                  fields: e.fields,
+                  code: e.parent.code,
+                  msg: e.parent.detail,
+                  severity: e.parent.severity 
+              }
+
+            res.send(response);
+            
               
 
           })
         
-          res.send(req.body);
+          
     }
 
 }
