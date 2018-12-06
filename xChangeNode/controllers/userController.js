@@ -86,7 +86,7 @@ userController=module.exports={
                         email_address: req.body.email_address,
                   }
                   response={
-                      code: 0,
+                      code: 1,
                       msg: 'Registration Successful',
                       data: data
                   }
@@ -186,7 +186,7 @@ userController=module.exports={
                 {
                     
                     response = {
-                        code: 0,
+                        code: 1,
                         msg: 'Authorized',
                         user_data: user_data
                     }
@@ -195,7 +195,7 @@ userController=module.exports={
                 else
                 {
                     response = {
-                        code: 1,
+                        code: 0,
                         msg: 'Not Authorized',
                     }
 

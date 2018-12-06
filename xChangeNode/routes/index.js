@@ -5,8 +5,8 @@ var userController = require('../controllers/userController');
 
 /* GET home page. */
 router.get('/', userController.index);
-router.post('/register', userController.register );
+router.post('/api/register', userController.register );
 router.get('/hash', userController.hash);
 router.get('/signin', userController.signin);
-router.post('/user-auth', userController.userAuth);
+router.post('/api/user-auth', userController.userAuth);
 module.exports = router;
