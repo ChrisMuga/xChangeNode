@@ -1,4 +1,5 @@
 db=require('./databaseController');
+var bcrypt = require('bcrypt-nodejs');
 const Sequelize = require('sequelize');
 // instantiate database
 const sequelize = new Sequelize(db.database, db.username, db.password, {
@@ -122,7 +123,24 @@ userController=module.exports={
     },
 
     fetch:function(){
-        
+
+    },
+
+    hash:function(){
+        xhash=null;
+        bcrypt.hash("bacon", null, null, function(err, hash) {
+            // Store hash in your password DB
+            console.log(hash);
+            xhash=hash;
+            console.log(xhash);
+        });
+
+        // Load hash from your password DB.
+        bcrypt.compare("bacon", xhash, function(err, res) 
+        {
+            // res == true
+            console.log(true);
+        });
     }
 
 

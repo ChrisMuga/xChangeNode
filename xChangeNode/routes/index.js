@@ -6,5 +6,6 @@ var userController = require('../controllers/userController');
 /* GET home page. */
 router.get('/', userController.index);
 router.post('/register', userController.register );
+router.get('/hash', userController.hash);
 
 module.exports = router;
