@@ -62,57 +62,71 @@ userController=module.exports={
     register: function(req, res, next)
     {
         var id = Math.floor((Math.random() * 10000) + 10);
-       
-        User.create({
-             
-            id:             id,
-            first_name:     req.body.first_name,
-            last_name:      req.body.last_name,
-            email_address:  req.body.email_address,
-            password:       req.body.password,
 
-          }).then(function (){
-              data={
-                    id: req.body.id,
-                    first_name: req.body.first_name,
-                    last_name: req.body.last_name,
-                    email_address: req.body.email_address,
-              }
-              response={
-                  code: 0,
-                  msg: 'Registration Successful',
-                  data: data
-              }
-              res.send(response);
-            }).catch(function (e)
-            {
-              //console.log(e.errors)
-              //console.log('fields:');
-              //console.log(e.fields);
-              //console.log('=====');
-              //console.log(e.parent);
-              //console.log('=====');
-              //console.log('code: '+e.parent.code);
-              //console.log('=====');
-              //console.log('msg: '+e.parent.detail);
-              //console.log('=====');
-              //console.log('severity: '+e.parent.severity);
-  
-              response = {
-                    fields: e.fields,
-                    code: e.parent.code,
-                    msg: e.parent.detail,
-                    severity: e.parent.severity 
-                }
-  
-                console.log(response);
-                res.send(response);
-  
-              
-              
-                
-  
-            });
+        //hash the password 
+        password = req.body.password;
+        xhash=null;
+        bcrypt.hash(password, null, null, function(err, hash) {
+            //Store hash in your password DB
+            //console.log(hash);
+
+            User.create({
+             
+                id:             id,
+                first_name:     req.body.first_name,
+                last_name:      req.body.last_name,
+                email_address:  req.body.email_address,
+                password:       hash,
+    
+              }).then(function (){
+                  data={
+                        id: req.body.id,
+                        first_name: req.body.first_name,
+                        last_name: req.body.last_name,
+                        email_address: req.body.email_address,
+                  }
+                  response={
+                      code: 0,
+                      msg: 'Registration Successful',
+                      data: data
+                  }
+                  res.send(response);
+                }).catch(function (e)
+                {
+                  //console.log(e.errors)
+                  //console.log('fields:');
+                  //console.log(e.fields);
+                  //console.log('=====');
+                  //console.log(e.parent);
+                  //console.log('=====');
+                  //console.log('code: '+e.parent.code);
+                  //console.log('=====');
+                  //console.log('msg: '+e.parent.detail);
+                  //console.log('=====');
+                  //console.log('severity: '+e.parent.severity);
+      
+                  response = {
+                        fields: e.fields,
+                        code: e.parent.code,
+                        msg: e.parent.detail,
+                        severity: e.parent.severity 
+                    }
+      
+                    console.log(response);
+                    res.send(response);
+      
+                  
+                  
+                    
+      
+                });
+
+
+
+
+        });
+       
+        
         
           
     },
@@ -129,7 +143,7 @@ userController=module.exports={
     hash:function(){
         xhash=null;
         bcrypt.hash("bacon", null, null, function(err, hash) {
-            // Store hash in your password DB
+            //Store hash in your password DB
             console.log(hash);
             xhash=hash;
             console.log(xhash);
@@ -138,9 +152,14 @@ userController=module.exports={
         // Load hash from your password DB.
         bcrypt.compare("bacon", xhash, function(err, res) 
         {
-            // res == true
+            //res == true
             console.log(true);
         });
+    },
+
+    signin: function(req, res, next)
+    {
+        res.send('Signin');
     }
 
 

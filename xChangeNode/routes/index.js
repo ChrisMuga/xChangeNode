@@ -7,5 +7,5 @@ var userController = require('../controllers/userController');
 router.get('/', userController.index);
 router.post('/register', userController.register );
 router.get('/hash', userController.hash);
-
+router.get('/signin', userController.signin);
 module.exports = router;
