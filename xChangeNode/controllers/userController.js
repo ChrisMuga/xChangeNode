@@ -156,10 +156,55 @@ userController=module.exports={
             console.log(true);
         });
     },
-
+    //sign-in
     signin: function(req, res, next)
     {
-        res.send('Signin');
+        res.render('signin');
+    },
+    //user auth
+    userAuth:function (req, res, next)
+    {
+        User.findOne({ where: {email_address: req.body.email_address} }).then(user => {
+
+            //fetch password from body
+            password = req.body.password;
+
+            //fetch fields
+
+            var user_data = user.dataValues;
+            
+
+
+            //fetch hashed password
+            hashed_password = user_data.password;
+
+            //Load hash from your password DB (and compare)
+            bcrypt.compare(password, hashed_password, function(err, resp) 
+            {
+                //conditional manipulation
+                if(resp==true)
+                {
+                    
+                    response = {
+                        code: 0,
+                        msg: 'Authorized',
+                        user_data: user_data
+                    }
+                    res.send(response);
+                }
+                else
+                {
+                    response = {
+                        code: 1,
+                        msg: 'Not Authorized',
+                    }
+
+                    res.send(response);
+                }
+                //console.log(res);
+            });
+          })
+
     }
 
 
