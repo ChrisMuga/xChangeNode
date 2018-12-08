@@ -205,8 +205,13 @@ userController=module.exports={
             });
           })
 
+    },
+
+    // users page
+
+    users: function(req, res, next)
+    {
+        res.render('users');
     }
-
-
 
 }
