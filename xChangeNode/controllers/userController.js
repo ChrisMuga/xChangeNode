@@ -214,7 +214,7 @@ userController=module.exports={
         User.findAll().then(users => {
 
             console.log(users);
-            res.send(users);
+            res.render('users', {users: users});
 
           })
     }
