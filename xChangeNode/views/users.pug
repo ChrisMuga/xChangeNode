@@ -5,6 +5,7 @@ block content
         div( class="col-md-4")
             h1 Users
             each user, index in users
-                h2  #{index+1} - #{user.first_name} #{user.last_name}
-                p   #{user.email_address}  
+                h2                                  #{index+1} - #{user.first_name} #{user.last_name}
+                p                                   #{user.email_address}  
+                div(class="badge badge-primary")    #{user.id}
         
