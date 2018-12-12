@@ -1,4 +1,9 @@
 extends skeleton/layout
 
 block content
-    h1 Upload
+    div(class="row d-flex justify-content-center mid-level")
+        div(class="col-md-4")
+            h1 Upload
+            form(action="upload-img" method="POST")
+                input(type="file", name="image")
+                input(type="submit" class="btn btn-primary form-control" value="Enter")

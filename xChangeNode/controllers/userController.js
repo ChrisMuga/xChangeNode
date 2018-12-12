@@ -219,9 +219,15 @@ userController=module.exports={
           })
     },
 
+    // test-upload view
     upload: function(req, res, next)
     {
         res.render('upload')
+    },
+
+    uploadImg: function(req, res, next)
+    {
+        res.send(req.body);
     }
 
 }
