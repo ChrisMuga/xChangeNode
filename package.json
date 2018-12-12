@@ -9,6 +9,7 @@
   "author": "Chris Muga",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "formidable": "^1.2.1"
   }
 }

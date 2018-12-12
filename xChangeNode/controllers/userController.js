@@ -217,6 +217,11 @@ userController=module.exports={
             res.render('users', {users: users});
 
           })
+    },
+
+    upload: function(req, res, next)
+    {
+        res.render('upload')
     }
 
 }

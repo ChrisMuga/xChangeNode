@@ -10,4 +10,5 @@ router.get('/hash', userController.hash);
 router.get('/signin', userController.signin);
 router.post('/api/user-auth', userController.userAuth);
 router.get('/users', userController.users);
+router.get('/upload', userController.upload);
 module.exports = router;
